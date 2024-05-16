@@ -17,6 +17,21 @@
 </head>
 <body>
 	<%
+		// 현재 세션 상태를 체크한다
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String)session.getAttribute("userID");
+		}
+		
+		// 이미 로그인했으면 회원가입을 할 수 없게 한다
+		if(userID != null){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 로그인이 되어 있습니다')");
+			script.println("location.href='main.jsp'");
+			script.println("</script>");
+		}
+	
 		if(user.getUserID() == null || user.getUserPassword() == null || user.getUserName() == null ||
 			user.getUserGender() == null || user.getUserEmail() == null){
 			PrintWriter script = response.getWriter();
@@ -34,6 +49,7 @@
 				script.println("history.back()");
 				script.println("</script>");
 			}else {
+				session.setAttribute("userID",user.getUserID()); // 회원가입 성공한 유저 세션부여
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('회원가입 성공')");
