@@ -1,4 +1,4 @@
-H2 데이터베이스 사용
+H2 데이터베이스 사용, [Eclipse] [JDBC] [H2 DB] [OpenJDK] 
 
 드라이버 클래스: org.h2.Driver
 
